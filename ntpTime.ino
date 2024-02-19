@@ -143,7 +143,7 @@ void loop() {
     digit0 = hour.substring(0, 1);
     digitIndex = 0;
     setNumber(digit0, digitIndex);
-  } else {
+  } else if (digit0 == "0") {
     Display.clear(0);
   }
   if (digit1 != hour.substring(1, 2)){
