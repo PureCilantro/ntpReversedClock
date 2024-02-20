@@ -139,7 +139,7 @@ void setup(){
 void loop() {
   obtainTime();
 
-  if (digit0 != hour.substring(0, 1) && digit0 != "0"){
+  if (digit0 != hour.substring(0, 1) && hour.substring(0, 1) != "0"){
     digit0 = hour.substring(0, 1);
     digitIndex = 0;
     setNumber(digit0, digitIndex);
