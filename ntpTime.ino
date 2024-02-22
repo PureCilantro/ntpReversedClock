@@ -32,7 +32,6 @@ String Formatted_time;
 
 const char *ssid     = "";
 const char *password = "";
-int digitIndex = 0;
 String digit0 = "61";
 String digit1 = "61";
 String digit2 = "61";
@@ -139,27 +138,25 @@ void setup(){
 void loop() {
   obtainTime();
 
-  if (digit0 != hour.substring(0, 1) && hour.substring(0, 1) != "0"){
+  if (digit0 != hour.substring(0, 1)){
     digit0 = hour.substring(0, 1);
-    digitIndex = 0;
-    setNumber(digit0, digitIndex);
-  } else if (digit0 == "0") {
-    Display.clear(0);
+    if (digit0 == "0") {
+      Display.clear(0);
+    } else {
+      setNumber(digit0, 0);
+    }
   }
   if (digit1 != hour.substring(1, 2)){
     digit1 = hour.substring(1, 2);
-    digitIndex = 1;
-    setNumber(digit1, digitIndex);
+    setNumber(digit1, 1);
   }
   if (digit2 != minute.substring(0, 1)){
     digit2 = minute.substring(0, 1);
-    digitIndex = 2;
-    setNumber(digit2, digitIndex);
+    setNumber(digit2, 2);
   }
   if (digit3 != minute.substring(1, 2)){
     digit3 = minute.substring(1, 2);
-    digitIndex = 3;
-    setNumber(digit3, digitIndex);
+    setNumber(digit3, 3);
   }
   
   Display.setColumn(1, 7, setdots);
