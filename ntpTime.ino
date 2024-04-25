@@ -63,7 +63,7 @@ void obtainTime() {
     Display.control(MD_MAX72XX::INTENSITY , 0);
   }
 
-  Serial.println ( hour + ":" + minute + "  " + Formatted_time);
+  Serial.println ( hour + ":" + minute + "   " + Formatted_time);
 }
 
 void updateTime() {
