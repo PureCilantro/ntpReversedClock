@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Font Builder</title>
+    <style>
+        .page {font-family: 'Comic Sans MS', cursive; text-align: center;}
+        .center {justify-content: center; align-items: center;}
+        .content {width: 100%; height: 50%; background-color: rgb(170, 170, 170); position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);}
+        .centerContent {display: flex; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);}
+        .display {background-color: black; padding: 5px;}
+        .dot {margin: 5px; border: none; width: 30px; height: 30px; border-radius: 15px; background-color: white;}
+        .dot:hover {background-color: rgb(230, 230, 230);}
+        .info {padding-left: 30px; padding-top: 20px; display: flex; flex-direction: column;}
+        .input {width: 275px;}
+        .control {background-color: white; color: black; border: 2px solid gray; border-radius: 5px; transition-duration: 0.4s}
+        .control:hover {background-color: gray; color: white;}
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dotCount = 8;
+            const displayDiv = document.querySelector('.display')
+            //Generate 8x8 dot matrix out of buttons
+            for (let i = 0; i < dotCount; i++) {
+                for (let j = 0; j < dotCount; j++) {
+                    const button = document.createElement('button')
+                    button.classList.add('dot')
+                    button.setAttribute('id', i.toString() + j.toString());
+                    displayDiv.appendChild(button)
+                }        
+                const br = document.createElement('br')
+                displayDiv.appendChild(br)        
+            }
+
+            const buttons = document.querySelectorAll('.dot')
+            //Add event listener to all dots to toggle color and update the outputs
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    if (button.style.backgroundColor == 'red') {
+                        button.style.backgroundColor = 'white';
+                    } else {
+                        button.style.backgroundColor = 'red';
+                    }
+                    updateCols();
+                    updateRows();
+                });
+            });
+        });
+
+        function updateRows () {
+            const textBox = document.getElementById("byRows");
+            let bin = '';
+            let output = '';
+            let i, j;
+            //Selecting all row dots and building row binary depending on color
+            for (i = 0; i < 8; i++) {
+                for (j = 0; j < 8; j++) {
+                    dot = document.getElementById(i.toString() + j.toString())
+                    if (dot.style.backgroundColor == 'red') {
+                        bin = '1' + bin;
+                    } else {
+                        bin = '0' + bin;
+                    } 
+                }
+                //Converting the binary to hex and adding it to the output with corresponding commas
+                output += '0x' + parseInt(bin, 2).toString(16).toUpperCase();
+                if (i != 7) {
+                    output += ', '
+                }
+                bin = '';
+            }//Clears binary before next row and asign final output to text box
+            textBox.value = output 
+        }
+        function updateCols () {
+            const textBox = document.getElementById("byCols");
+            let bin = '';
+            let output = '';
+            let i, j;
+            //Selecting all row dots and building row binary depending on color
+            for (i = 0; i < 8; i++) {
+                for (j = 0; j < 8; j++) {
+                    dot = document.getElementById(j.toString() + i.toString())
+                    if (dot.style.backgroundColor == 'red') {
+                        bin = '1' + bin;
+                    } else {
+                        bin = '0' + bin;
+                    } 
+                }
+                //Converting the binary to hex and adding it to the output, commas and order are tweaked
+                if (i != 8 && i != 0) {
+                    output = ', ' + output
+                }
+                output = '0x' + parseInt(bin, 2).toString(16).toUpperCase() + output;
+                
+                bin = '';
+            }//Clears binary before next row and asign final output to text box
+            textBox.value = output 
+        }
+
+        function clearDisplay() {
+            const buttons = document.querySelectorAll('.dot');
+            //Selects all dots, makes them all white and updates rows and cols
+            buttons.forEach((button) => {
+                button.style.backgroundColor = 'white';
+            });
+            updateCols();
+            updateRows();
+        }
+
+        function copyTextR () {
+            var copyText = document.getElementById("byRows");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+        }//Functions to copy text of each text box
+        function copyTextC () {
+            var copyText = document.getElementById("byCols");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+        }
+    </script>
+</head>
+<body>
+    <div class="page">
+        <div class="center">
+            <h1><a href="https://github.com/PureCilantro/ntpReversedClock">ntpReversedClock</a> Font Builder</h1><br>
+            The Hex array output is flipped so the reflection is the right way
+            <div class="content">
+                <div class="centerContent">
+                    <div class="display">
+                    
+                    </div>
+                    <div class="info">
+                        <div>
+                            <p>Hex values per row:</p>
+                            <input type="text" id="byRows" class="input">
+                            <button onclick="copyTextR()" class="control">Copy</button><br>
+                        </div>
+                        <div>
+                            <p>Hex values per column:</p>
+                            <input type="text" id="byCols" class="input">
+                            <button onclick="copyTextC()" class="control">Copy</button><br><br>
+                        </div>
+                        <div>
+                            <button onclick="clearDisplay()" class="control">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
