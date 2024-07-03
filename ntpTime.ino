@@ -26,9 +26,11 @@ unsigned char seteight[8] ={0x1C, 0x36, 0x36, 0x1C, 0x36, 0x36, 0x36, 0x1C}; //D
 unsigned char setnine[8]  ={0x1C, 0x36, 0x36, 0x3C, 0x30, 0x30, 0x32, 0x1C}; //Digit 9
 unsigned char setdots = 0x24;
 unsigned char setblank = 0x0;
+int rowDelay = 50;
 
 String hour, minute;
 String Formatted_time;
+bool isDay = false;
 
 const char *ssid     = "";
 const char *password = "";
@@ -46,6 +48,15 @@ void obtainTime() {
   hour = Formatted_time.substring(0, 2);
   minute = Formatted_time.substring(3, 5);
 
+  if (hour >= "07" && hour <= "18" && !isDay) {
+    Display.control(MD_MAX72XX::INTENSITY , 1);
+    isDay = true;
+  }
+  if (hour >= "19" && isDay) {
+    Display.control(MD_MAX72XX::INTENSITY , 0);
+    isDay = false;
+  }
+
   if ((hour.toInt() == 0) or (hour.toInt() == 12)) {
     hour = String(12);
   }
@@ -56,14 +67,7 @@ void obtainTime() {
     }
   }
 
-  if (Formatted_time == "07:00:00") {
-    Display.control(MD_MAX72XX::INTENSITY , 1);
-  }
-  if (Formatted_time == "19:00:00") {
-    Display.control(MD_MAX72XX::INTENSITY , 0);
-  }
-
-  Serial.println ( hour + ":" + minute + "   " + Formatted_time);
+  Serial.println ( hour + ":" + minute + "  " + Formatted_time);
 }
 
 void updateTime() {
@@ -87,51 +91,61 @@ void setNumber(String Sdigit,int digitIndex) {
     case 0:
       for (int j=0; j<8; j++) {
         Display.setRow(digitIndex, j, setzero[j]);
+        delay(rowDelay);
       } 
       break;
     case 1:
       for (int j=0; j<8; j++) {
         Display.setRow(digitIndex, j, setone[j]);
+        delay(rowDelay); 
       }
       break;
     case 2:
       for (int j=0; j<8; j++) {
         Display.setRow(digitIndex, j, settwo[j]);
+        delay(rowDelay);
       }
       break;
     case 3:
       for (int j=0; j<8; j++) {
         Display.setRow(digitIndex, j, setthree[j]);
+        delay(rowDelay);
       }
       break;
     case 4:
       for (int j=0; j<8; j++) {
         Display.setRow(digitIndex, j, setfour[j]);
+        delay(rowDelay);
       }
       break;
     case 5:
       for (int j=0; j<8; j++) {
         Display.setRow(digitIndex, j, setfive[j]);
+        delay(rowDelay);
       }
       break;
     case 6:
       for (int j=0; j<8; j++) {
         Display.setRow(digitIndex, j, setsix[j]);
+        delay(rowDelay);
       }
       break;
     case 7:
       for (int j=0; j<8; j++) {
         Display.setRow(digitIndex, j, setseven[j]);
+        delay(rowDelay);
       }
       break;
     case 8:
       for (int j=0; j<8; j++) {
         Display.setRow(digitIndex, j, seteight[j]);
+        delay(rowDelay);
       }
       break;
     case 9:
       for (int j=0; j<8; j++) {
         Display.setRow(digitIndex, j, setnine[j]);
+        delay(rowDelay);
       }
       break;
   }
