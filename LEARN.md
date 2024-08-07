@@ -31,3 +31,5 @@ _Note: I didn't glue the bottom cover for ease of access in case I need to updat
 
 - Make sure to clean the acrylic regularly to maintain the transparency of it and the HUD effect.
 - My desk setup is not that bright and at night the display would easily illuminate my whole room red, so I cut a piece of window tinting film to the size of the display and its fine now.
+- If you are using the USB-C ports you can flip the back piece to get the port to either side.
+- You can see what pieces go where according to their size, at the bottom of the release notes there is a picture if you mix them up.
