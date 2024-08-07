@@ -18,7 +18,7 @@ _Note: the displays usually come with their own cables, the ESP8266 don't so you
   <br><br>
 - Select the COM port and the `NodeMCU 1.0 (ESP-12E Module)` board and upload the code.
 
-### 2. Building a case
+### 3. Building a case
 
 - My design holds the acrylic sheet at 48.25°, slightly elevated and the height of the case is enough to hold the ESP8266 vertically inside.
 I desoldered the VIN side headers so the board takes up less space and soldered a [USB-C port](https://es.aliexpress.com/item/1005005673073529.html?spm=a2g0o.order_list.order_list_main.67.70df194dN1B7Wq&gatewayAdapt=glo2esp) to VIN and GND that gets inserted into the back of the case and powered the display through  the VV pin.
@@ -27,7 +27,7 @@ I desoldered the VIN side headers so the board takes up less space and soldered 
 
 _Note: I didn't glue the bottom cover for ease of access in case I need to update the software or something breaks_
 
-### 3. Care and final notes
+### 4. Care and final notes
 
 - Make sure to clean the acrylic regularly to maintain the transparency of it and the HUD effect.
 - My desk setup is not that bright and at night the display would easily illuminate my whole room red, so I cut a piece of window tinting film to the size of the display and its fine now.
