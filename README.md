@@ -2,6 +2,7 @@
 ### A ESP2866 based ntp clock with reversed MAX7219 dot matrix display for a hud type look.
 
 ### [Check out the latest release!!!](https://github.com/PureCilantro/ntpReversedClock/releases/latest)
+### [For a how to build guide check out LEARN.md!!!](https://github.com/PureCilantro/ntpReversedClock/blob/main/LEARN.md)
 
 # Version highlights
 
